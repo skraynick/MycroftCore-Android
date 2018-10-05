@@ -52,6 +52,7 @@ public class MycroftContract {
         public static final String COLUMN_NAME_TAG = "tag";
     }
 
+    // This table handles the install information for each skill or module that is installed
     public static final class Module implements BaseColumns{
         //This is the table name
         public static final String TABLE_NAME = "modules";

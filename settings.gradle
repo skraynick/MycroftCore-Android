@@ -1,1 +1,1 @@
-include ':app', ':adapt', ':mycroftspeakskill', ':mycroftlistenskill', ':pocketsphinx'
+include ':Core-Kernel', ':adapt', ':Default-TTS-Skill', ':Default-STT-Skill', ':pocketsphinx'

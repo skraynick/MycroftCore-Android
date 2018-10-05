@@ -34,6 +34,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /*
+    This whole section needs to be updated for modularity. I need a ServiceConnection factory for
+    any services that need to be bound to the lifecycle of Mycroft.
+
+    It does need to be stressed however, that a service or skill does not need to always be running
+    to receive outside data. It can either receive it directly from Android or through the core instead
+    of always running
+     */
+
     Messenger mService, nService = null;
     /** Flag indicating whether we have called bind on the service. */
     boolean mBound, nBound;
@@ -61,12 +70,6 @@ public class MainActivity extends AppCompatActivity {
     //This is a simple service copy, for the second bound service (Listener)
     private ServiceConnection nConnection = new ServiceConnection() {
         public void onServiceConnected(ComponentName className, IBinder service) {
-            // This is called when the connection with the service has been
-            // established, giving us the object we can use to
-            // interact with the service.  We are communicating with the
-            // service using a Messenger, so here we get a client-side
-            // representation of that from the raw IBinder object.
-            nService = new Messenger(service);
             nBound = true;
         }
 

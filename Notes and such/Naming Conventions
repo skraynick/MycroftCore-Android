@@ -1,0 +1,10 @@
+* Core-Kernel
+This is the standard Mycroft for Android core app. It maintains the systems lifecycle, as well
+the primary internal database
+
+* Comm Center (Command Center)
+THis is a central, user friendly portion of the application that allows for display, modification,
+and use of the internal analytics and logic of the system. For instance, if Mycroft made a mistake
+classifying an utterance, then a user can manually select the utterance, and change what it instead
+should have referenced. This updated dataset will contribute to the future accuracy of the system, and
+allow Mycroft to understand the users intents better.

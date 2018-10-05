@@ -95,7 +95,7 @@ public class PocketSphinxService extends Service implements RecognitionListener 
 
     //When a skill just needs to call the voice service once, it's called here
     public void handleSkillCall() {
-        Log.i("MycroftListen","Handeling a skill call");
+        Log.i("MycroftListen","Handling a skill call");
     }
 
     public void onCreate() {

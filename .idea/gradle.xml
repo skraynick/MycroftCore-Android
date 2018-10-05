@@ -8,10 +8,10 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/Core-Kernel" />
+            <option value="$PROJECT_DIR$/Default-STT-Skill" />
+            <option value="$PROJECT_DIR$/Default-TTS-Skill" />
             <option value="$PROJECT_DIR$/adapt" />
-            <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/mycroftlistenskill" />
-            <option value="$PROJECT_DIR$/mycroftspeakskill" />
             <option value="$PROJECT_DIR$/pocketsphinx" />
           </set>
         </option>

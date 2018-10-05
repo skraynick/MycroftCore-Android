@@ -24,7 +24,7 @@ public class InstallReceiver extends BroadcastReceiver {
 
         //Get package ID and send explicit intent\
         // This package ID and name should be saved to query uninstall broadcasts
-        Log.i(TAG, "Install broadcast received by NAVCORE");
+        Log.i(TAG, "Install broadcast received by Core-Kernel");
 
         //This gets the package name of the new package
         Bundle b = intent.getExtras();
