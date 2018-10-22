@@ -19,13 +19,17 @@ and their execution. Most, if not all of this data can be referenced by the Comm
 * Skill Freq Table
 |Name|Flag|Frequency(Float)|
 
-This is a simple table that holds the frequency of which an individual skill, and which method in the skikk
+This is a simple table that holds the frequency of which an individual skill, and which method in the skill
 is selected, so that skills can be ranked in search order to spead up search time, and for general analytics.
 
+* Utterance Table
+|Timestamp|Utterance|Skill_Choice|Ut_Ref|
+This table holds all inputs given to Mycroft by the user, and records how the input was sorted. This
+is expected to become a list of inputs that will later be used to train Mycroft and refine its search
+in relation to the user.
 
 The skill databases takes the place of the Mycroft Skill Manager on the python implementation.
 I am attempting to implement it as generic as I can so that it can be used by any skill adapter that
-could come between now and forever. The three basic groups I am thinking of are individual words,
-regexs, and utterances. Pretty much each category is a string, which gives it incredible flexibility
+qwregexs, and utterances. Pretty much each category is a string, which gives it incredible flexibility
 for storage when it comes to saving data.
 

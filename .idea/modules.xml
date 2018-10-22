@@ -5,8 +5,8 @@
       <module fileurl="file://$PROJECT_DIR$/Core-Kernel/Core-Kernel.iml" filepath="$PROJECT_DIR$/Core-Kernel/Core-Kernel.iml" />
       <module fileurl="file://$PROJECT_DIR$/Default-STT-Skill/Default-STT-Skill.iml" filepath="$PROJECT_DIR$/Default-STT-Skill/Default-STT-Skill.iml" />
       <module fileurl="file://$PROJECT_DIR$/Default-TTS-Skill/Default-TTS-Skill.iml" filepath="$PROJECT_DIR$/Default-TTS-Skill/Default-TTS-Skill.iml" />
+      <module fileurl="file://$PROJECT_DIR$/IntentParser/IntentParser.iml" filepath="$PROJECT_DIR$/IntentParser/IntentParser.iml" />
       <module fileurl="file://$PROJECT_DIR$/MycroftCore-Android.iml" filepath="$PROJECT_DIR$/MycroftCore-Android.iml" />
-      <module fileurl="file://$PROJECT_DIR$/adapt/adapt.iml" filepath="$PROJECT_DIR$/adapt/adapt.iml" />
       <module fileurl="file://$PROJECT_DIR$/pocketsphinx/pocketsphinx.iml" filepath="$PROJECT_DIR$/pocketsphinx/pocketsphinx.iml" />
     </modules>
   </component>

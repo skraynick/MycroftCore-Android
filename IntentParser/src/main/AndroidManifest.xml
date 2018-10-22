@@ -22,7 +22,7 @@
         </service>
 
         <service
-            android:name="tech.mabase.www.adapt.AdaptParser"
+            android:name="tech.mabase.www.adapt.ParseIntentReceiver"
             android:enabled="true"
             android:exported="true">
 

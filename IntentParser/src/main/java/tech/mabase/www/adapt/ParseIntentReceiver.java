@@ -11,8 +11,8 @@ import android.os.Messenger;
 import android.util.Log;
 import android.widget.Toast;
 
-public class AdaptParser extends Service {
-    public AdaptParser() {
+public class ParseIntentReceiver extends Service {
+    public ParseIntentReceiver() {
     }
 
     /**
@@ -76,7 +76,7 @@ public class AdaptParser extends Service {
             mycroft.putExtra("response","speak");
             startService(mycroft);
         } catch (Exception e){
-            Log.e("AdaptParser","Whatever Mycroft Core you're using didn't implement the service properly");
+            Log.e("ParseIntentReceiver","Whatever Mycroft Core you're using didn't implement the service properly");
         }
     }
 

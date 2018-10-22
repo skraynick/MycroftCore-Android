@@ -106,7 +106,7 @@ public class MycroftService extends Service {
         skill.setComponent(ComponentName.createRelative(SKILL_PACKAGE,SKILL_PACKAGE+"."+SKILL_CLASS));
     }
 
-    //This is catching MyscroftActivity CLI and VoiceService utterances for parsing.
+    //This is catching MycroftActivity CLI and VoiceService utterances for parsing.
     private void parseUtterance(String param1) {
         //This needs to be changed so it tries to bound the service if unbound
         if (!mBound) return;
