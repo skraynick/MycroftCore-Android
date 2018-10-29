@@ -11,7 +11,7 @@
             <option value="$PROJECT_DIR$/Core-Kernel" />
             <option value="$PROJECT_DIR$/Default-STT-Skill" />
             <option value="$PROJECT_DIR$/Default-TTS-Skill" />
-            <option value="$PROJECT_DIR$/IntentParser" />
+            <option value="$PROJECT_DIR$/NNIntentParser" />
             <option value="$PROJECT_DIR$/pocketsphinx" />
           </set>
         </option>

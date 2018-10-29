@@ -1,1 +1,1 @@
-include ':Core-Kernel', ':IntentParser', ':Default-TTS-Skill', ':Default-STT-Skill', ':pocketsphinx'
+include ':Core-Kernel', ':NNIntentParser', ':Default-TTS-Skill', ':Default-STT-Skill', ':pocketsphinx'

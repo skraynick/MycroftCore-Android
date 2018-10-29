@@ -1,0 +1,9 @@
+It is appearing that the Intent Parser (NNInentParser) is gaining some feature creap. Perhaps I will
+have to split it off into two modules before too long.
+
+The reason for this feature creep is that I am trying to keep the intent matching and parsing features
+localized to a specific parser, so that the user can have multiple parsers installed. Unfortuately
+this relies on a NN algorithm, which I have baked into the intent parser. As time goes on and
+functionality changes I may move it into core instead and illustrate an API style call to the core.
+We'll see, since I have to be sure it won't impact system battery life or significatly decreese app
+speed
