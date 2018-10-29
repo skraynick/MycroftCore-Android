@@ -119,6 +119,9 @@ public class TrainingManager extends AppCompatActivity {
             double sld = params[2];
             double swd = params[3];
 
+            //This should be String utterance = input, and then it should be tokenized and matched
+            //with the internal word dictionary
+
 
             //Write them in the log
             Log.d("myNetwork Output ", "do in background string pl = " + pld);
@@ -163,6 +166,9 @@ public class TrainingManager extends AppCompatActivity {
             int i = 0;
             for(int r=0; r<row; r++){
                 for(int c=0; c<col; c++){
+                    //This is likely to call the data from the database. When should I clean it?
+                    //When installed (how would I save it in the database?), when initilized? on each
+                    //run?
                     intentMatrix[r][c] = sampleFileStream[i++];
                 }
             }

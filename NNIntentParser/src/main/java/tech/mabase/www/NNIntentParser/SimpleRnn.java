@@ -41,6 +41,9 @@ import java.util.Map;
  * @author Alex Black
  */
 
+/**
+ * Perhaps I should move this into it's own package, since it's really a predefined network
+ */
 public class SimpleRnn extends BaseRecurrentLayer {
 
     //This is needed by the base class. Not sure why for
