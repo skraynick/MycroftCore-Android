@@ -10,6 +10,6 @@ public class IntentVariableExtracter {
      * I will need to save a model for each skill, which means training time for it. Perhaps
      * eventually the training can be done by a SDK, but I may need to figure out how to do it here
      * low impact until then. That said, it could be that they all used transfer NNs instead of
-     * needing to do it from scratch each time
+     * needing to do it from scratch each time.
      */
 }
