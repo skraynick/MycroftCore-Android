@@ -24,6 +24,8 @@ public class TrainingManager extends AppCompatActivity {
     double first;
     double second;
     double third;
+    //Instead, make an array that equals the numebr of intents saved in the database
+    double categories = getNumOfIntents();
 
     /* @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -211,9 +213,9 @@ public class TrainingManager extends AppCompatActivity {
             //This is the NN that is being built
             SimpleRnn inputLayer = new SimpleRnn.Builder()
                     //This will be the number of input parameters
-                    .nIn(4)
+                    .nIn(4) //<- .nIn(lengthOfLongestSentence)
                     //I think this will be the number of intent categories
-                    .nOut(3)
+                    .nOut(3) //<- .nOut(numOfIntents)
                     .name("Input")
                     .build();
             /* original hidden layer
@@ -225,8 +227,8 @@ public class TrainingManager extends AppCompatActivity {
              */
             SimpleRnn hiddenLayer = new SimpleRnn.Builder()
                     //I believe this is 3 because it is supposed to match the output of inputLayer
-                    .nIn(3)
-                    .nOut(3)
+                    .nIn(3) // Longest sentence /2 (this can't change each training time though... can it?)
+                    .nOut(3) //Do they need to be equal
                     .name("Hidden")
                     .build();
 
@@ -240,8 +242,8 @@ public class TrainingManager extends AppCompatActivity {
             */
             SimpleRnn outputLayer = new SimpleRnn.Builder()
                     //Same as the hiddenLayer, match the input to hiddenLayers output
-                    .nIn(3)
-                    .nOut(3)
+                    .nIn(3)  //I think this needs to match the output of the prior layer, so it's full connected
+                    .nOut(3) //numOfIntents
                     .name("Output")
                     .build();
 
@@ -281,6 +283,15 @@ public class TrainingManager extends AppCompatActivity {
 
             //Retrieve the three probabilities
             //This could be set up as a dynamic array, so it adjusts w/ the number of intents
+
+            /*
+            for(int i = 0; i < categories.length(); i++){
+                categories[0,i] = actualOutput.getDouble(0, i);
+
+                return "":
+            }
+            */
+
             first = actualOutput.getDouble(0,0);
             second = actualOutput.getDouble(0,1);
             third = actualOutput.getDouble(0,2);
