@@ -1,4 +1,10 @@
-This is Mycroft Core for Android
+# This is Mycroft Core for Android
+
+## Notes directory
+
+I'm pretty bad with organization, and still learning a bit of github. Under the projects is a folder called Notes and such. be sure to check it out
+
+## Other notes
 
 Currently, it uses a simple text interface to test its interaction with the parser and skills. Eventually this will be replaced with a bindable Pocketsphinx service.
 

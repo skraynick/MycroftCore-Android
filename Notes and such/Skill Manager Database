@@ -1,0 +1,35 @@
+The Skill Manager database handles all of the information internally related to skills, services
+and their execution. Most, if not all of this data can be referenced by the Comm Center
+
+* Skill Manager table
+|Skill_Adapter|Variable_Type|Skill|Status|
+- Skill_Adapter refers to whether its a Mycroft Skill, Google skill, etc
+- Variable_Type questions if it is an Utterance, Regex, or Word
+- Skill is the name of the skill
+- Status is if its local, remote, or otherwise
+
+* Skill Stats Table
+|Utterance_Reference|SKill_Variable|Skill_Method|Skill_Name|Timestamp|
+- Utterance_Reference is a unique key that locates an utterance in the utterance table
+- Skill_Variable is what variable was extracted from the utterance
+-- This allows the Comm Center and user to change what is or should have been considered a variable
+- Skill_Method is what internal skill logic was used to execute this command
+-- This can be used to "build" new skills from existing skills
+
+* Skill Freq Table
+|Name|Flag|Frequency(Float)|
+
+This is a simple table that holds the frequency of which an individual skill, and which method in the skill
+is selected, so that skills can be ranked in search order to spead up search time, and for general analytics.
+
+* Utterance Table
+|Timestamp|Utterance|Skill_Choice|Ut_Ref|
+This table holds all inputs given to Mycroft by the user, and records how the input was sorted. This
+is expected to become a list of inputs that will later be used to train Mycroft and refine its search
+in relation to the user.
+
+The skill databases takes the place of the Mycroft Skill Manager on the python implementation.
+I am attempting to implement it as generic as I can so that it can be used by any skill adapter that
+qwregexs, and utterances. Pretty much each category is a string, which gives it incredible flexibility
+for storage when it comes to saving data.
+

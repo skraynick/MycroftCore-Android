@@ -1,0 +1,11 @@
+It can be expected that the core-kernel will implement some basic features, such as TTS, STT, and
+a command line. This page details what can be expected for development. It is subject to change
+until a standard is decided on.
+
+Standard Skills:
+* Default-STT-Skill
+* Default-TTS-Skill
+* Command-Line
+** This is implemented in the service notification of Mycroft, it can also be found in Mycroft Cores
+app
+* Padatious/Adapt (Intent Parser)
