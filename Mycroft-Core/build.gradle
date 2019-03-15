@@ -1,0 +1,67 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    defaultConfig {
+        applicationId "www.mabase.tech.mycroft"
+        minSdkVersion 26
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    productFlavors {
+    }
+}
+
+dependencies {
+    // These are DL4J dependenices
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    //v7:26 is what it should be
+    implementation 'com.android.support:appcompat-v7:26'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    // These are the DL4J dependencies
+    implementation('org.deeplearning4j:deeplearning4j-core:1.0.0-beta2') {
+        exclude group: 'org.bytedeco.javacpp-presets', module: 'opencv-platform'
+        exclude group: 'org.bytedeco.javacpp-presets', module: 'leptonica-platform'
+        exclude group: 'org.bytedeco.javacpp-presets', module: 'hdf5-platform'
+    }
+    implementation 'org.nd4j:nd4j-native:1.0.0-beta2'
+    implementation 'org.nd4j:nd4j-native:1.0.0-beta2'
+    implementation 'org.nd4j:nd4j-native:1.0.0-beta2'
+    implementation 'org.nd4j:nd4j-native:1.0.0-beta2'
+    implementation 'org.nd4j:nd4j-native:1.0.0-beta2'
+    implementation 'org.bytedeco.javacpp-presets:openblas:0.3.0-1.4.2'
+    implementation 'org.bytedeco.javacpp-presets:openblas:0.3.0-1.4.2'
+    implementation 'org.bytedeco.javacpp-presets:openblas:0.3.0-1.4.2'
+    implementation 'org.bytedeco.javacpp-presets:openblas:0.3.0-1.4.2'
+    implementation 'org.bytedeco.javacpp-presets:openblas:0.3.0-1.4.2'
+    implementation 'org.bytedeco.javacpp-presets:opencv:3.4.2-1.4.2'
+    implementation 'org.bytedeco.javacpp-presets:opencv:3.4.2-1.4.2'
+    implementation 'org.bytedeco.javacpp-presets:opencv:3.4.2-1.4.2'
+    implementation 'org.bytedeco.javacpp-presets:opencv:3.4.2-1.4.2'
+    implementation 'org.bytedeco.javacpp-presets:opencv:3.4.2-1.4.2'
+    implementation 'org.bytedeco.javacpp-presets:leptonica:1.76.0-1.4.2'
+    implementation 'org.bytedeco.javacpp-presets:leptonica:1.76.0-1.4.2'
+    implementation 'org.bytedeco.javacpp-presets:leptonica:1.76.0-1.4.2'
+    implementation 'org.bytedeco.javacpp-presets:leptonica:1.76.0-1.4.2'
+    implementation 'org.bytedeco.javacpp-presets:leptonica:1.76.0-1.4.2'
+    implementation 'com.android.support:appcompat-v7:26.0.1'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    /*testCompile*/ implementation 'junit:junit:4.12'
+}
