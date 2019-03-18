@@ -22,7 +22,13 @@ public class ParseIntentReceiver extends Service {
 
     /**
      * When binding to the service, we return an interface to our messenger
-     * for sending messages to the service.
+     * for sending messages to the services
+     */
+
+    /*
+    This onBind is supposed to bind the intent parser to the MainActivity of the application so that it is always running,
+    and it maintains a constant footprint on the device, without creating and destroying the parser every time an utterance
+    is spoken
      */
     @Override
     public IBinder onBind(Intent intent) {

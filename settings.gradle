@@ -1,1 +1,1 @@
-include ':Mycroft-Core', ':NNIntentParser', ':Default-STT-Skill', ':pocketsphinx'
+include ':Mycroft-Core', ':pocketsphinx'

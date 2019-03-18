@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
     /*
         This is a simple version of user input for testing the application. Eventually it will be replaced by the SpeakSkill module
+        submit is triggered when the Enter button is pressed on the main UI. Currently it sends a string to the parser (as if it were uttered)
     */
     public void submit(View v){
 

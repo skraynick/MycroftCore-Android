@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Default-STT-Skill/Default-STT-Skill.iml" filepath="$PROJECT_DIR$/Default-STT-Skill/Default-STT-Skill.iml" />
       <module fileurl="file://$PROJECT_DIR$/Mycroft-Core/Mycroft-Core.iml" filepath="$PROJECT_DIR$/Mycroft-Core/Mycroft-Core.iml" />
       <module fileurl="file://$PROJECT_DIR$/MycroftCore-Android.iml" filepath="$PROJECT_DIR$/MycroftCore-Android.iml" />
-      <module fileurl="file://$PROJECT_DIR$/NNIntentParser/NNIntentParser.iml" filepath="$PROJECT_DIR$/NNIntentParser/NNIntentParser.iml" />
       <module fileurl="file://$PROJECT_DIR$/pocketsphinx/pocketsphinx.iml" filepath="$PROJECT_DIR$/pocketsphinx/pocketsphinx.iml" />
     </modules>
   </component>

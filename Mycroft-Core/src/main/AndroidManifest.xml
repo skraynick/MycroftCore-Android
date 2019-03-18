@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="www.mabase.tech.mycroft">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />test
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -32,6 +35,9 @@
             android:name=".MycroftService"
             android:enabled="true"
             android:exported="true">
+            <intent-filter>
+                <action android:name="mycroft.CORE_BIND"/>
+            </intent-filter>
         </service>
 
         <provider
@@ -40,6 +46,14 @@
             android:enabled="true"
             android:exported="true" />
 
+        <service
+            android:name=".mycroftstt.PocketSphinxService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="mycroft.STT_START"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

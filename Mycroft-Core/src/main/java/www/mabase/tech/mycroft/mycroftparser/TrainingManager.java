@@ -25,7 +25,7 @@ public class TrainingManager extends AppCompatActivity {
     double second;
     double third;
     //Instead, make an array that equals the numebr of intents saved in the database
-    double categories = getNumOfIntents();
+    //double categories = getNumOfIntents();
 
     /* @Override
     public void onCreate(Bundle savedInstanceState) {

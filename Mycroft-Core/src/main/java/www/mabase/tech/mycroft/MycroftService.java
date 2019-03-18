@@ -5,7 +5,9 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.os.Binder;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
@@ -13,6 +15,10 @@ import android.os.RemoteException;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
+
+import java.util.LinkedList;
+
+import www.mabase.tech.mycroft.mycroftstt.PocketSphinxService;
 
 /**
  * This service ensures that Mycroft is always running and always available. It also offers a simple CLI for the user.
@@ -24,16 +30,56 @@ public class MycroftService extends Service {
     private static final String ACTION_MYCROFT_PARSE = "android.intent.action.MYCROFT_PARSE";
     private static final String ACTION_MODULE_CHECK = "android.intent.action.MODULE_CHECK";
 
+    // Target we public for clients to send messages to IncomingHandler
+    Messenger mMessenger;
+
     public MycroftService() {
     }
 
+    // I am defining a custom Handler, with its own handleMessage method
+    private static Handler IncomingHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg){
+            /*
+            Use this space to handle incoming messages. That being said, I don't know what messages
+            I am expecting to Handle? This is where I can redirect the data flow
+            */
+            // Get the bundle and extract the message
+            Bundle bundle = msg.getData();
+            // I should wrap this in a try catch
+            Log.i("MycroftService", (String)bundle.get("Message"));
+            /*
+            if(msg == "Utterance"){
+                parseUtterance(msg);
+            }else if(msg == "Parse Finished"){
+                handleParserFinished(msg.getParser());
+            }else if(msg == "New Mycroft Plugin"){
+                installPlugin(msg.getPluginDetails());
+             */
+
+        }
+    };
     @Override
     public IBinder onBind(Intent intent) {
-        // TODO: Return the communication channel to the service.
-        throw new UnsupportedOperationException("Not yet implemented");
+
+        /*
+        This returns a binder to the service asking to bind with MycroftService. I give them my
+        custom handler IncomingHandler, which they will send messages to
+        */
+
+        mMessenger = new Messenger(IncomingHandler);
+        /*
+        This sends them the Binder for mMessenger, so when the send it a message it comes to
+        MycroftService
+         */
+        return mMessenger.getBinder();
     }
 
     //This service needs to be able to 'hear' the responses from parsers
+    /*
+    The service listens for responses from the parser.
+    THIS SHOULD BE REPLACED WITH AN INCOMING HANDLER
+     */
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (intent != null) {
@@ -107,10 +153,8 @@ public class MycroftService extends Service {
     }
 
     //This is catching MycroftActivity CLI and VoiceService utterances for parsing.
-    private void parseUtterance(String param1) {
-        //This needs to be changed so it tries to bound the service if unbound
-        if (!mBound) return;
-        // Create and send a message to the service, using a supported 'what' value
+    private void parseUtterance(String Utterance) {
+       /* // Create and send a message to the service, using a supported 'what' value
         Message msg = Message.obtain();
         //Set the what to parse
         msg.what = 1;
@@ -123,7 +167,7 @@ public class MycroftService extends Service {
         } catch (RemoteException e) {
             e.printStackTrace();
         }
-
+       */
     }
     /*
     For this version of Android, I am stuck making the notification a read only
@@ -141,101 +185,45 @@ public class MycroftService extends Service {
                         .setContentText("Hello, User");
 
         startForeground(1225, mBuilder.build());
-        //Start always listening voice service
-        /*
-        Check the Mycroft Module database to see if there are any modules marked for STT.
-        Only one can be used at a time (for hotword listening). It should be marked in the Db
-        as the default. Start the service
-         */
-        /*
-        Bind PocketSpinx
 
+        /*
+        This section starts all the needed external components for Mycroft to work, namely the STT
+        service, and the parser. Right now they are static, but eventually the will be replaced with
+        a database lookup so they can be changed in the settings menu. These services by default
+        will bind to MycroftService upon startup
          */
-        String LISTEN_PACKAGE = "tech.mabase.www.mycroftlistenskill";
-        String LISTEN_CLASS = "PocketSphinxService";
         try {
-            Intent listenerInit = new Intent();
+            Intent startSTT = new Intent();
             //This should allow dynamic package names
-            listenerInit.setComponent(ComponentName.createRelative(LISTEN_PACKAGE,LISTEN_PACKAGE+"."+LISTEN_CLASS));
-            bindService(listenerInit, nConnection, Context.BIND_AUTO_CREATE);
+            startSTT.setClass(this, PocketSphinxService.class);
+            startSTT.setAction("mycroft.STT_START");
+            startService(startSTT);
         } catch (Exception e) {
-            Log.e("MycroftService", "Couldn't seem to bind Mycroft Listen Skill");
-            Toast.makeText(getApplicationContext(), "Couldn't bind PocketSphinx", Toast.LENGTH_SHORT).show();
+            Log.e("MycroftService", "Couldn't seem to start MycroftSTT");
         }
 
         /*
         Here it should bind up to 4 parser services
         request from the core database all parser package names.
          */
-        String ADAPT_PACKAGE = "tech.mabase.www.adapt";
-        String ADAPT_CLASS = "AdaptParser";
+        String PARSE_PACKAGE = "tech.mabase.www.adapt";
+        String PARSE_CLASS = "AdaptParser";
         try {
             Intent parserInit = new Intent();
-            //This should allow dynamic package names
-            parserInit.setComponent(ComponentName.createRelative(ADAPT_PACKAGE,ADAPT_PACKAGE+"."+ADAPT_CLASS));
-            bindService(parserInit, mConnection, Context.BIND_AUTO_CREATE);
+            //This should allow dynamic package name
+            parserInit.setComponent(ComponentName.createRelative(PARSE_PACKAGE,PARSE_PACKAGE+"."+PARSE_CLASS));
+            // Don't forget to start the service
         } catch (Exception e) {
-            Log.e("MycroftService", "Couldn't seem to bind Adapt");
+            Log.e("MycroftService", "Couldn't start MycroftParser");
         }
     }
 
-    Messenger mService, nService = null;
-    /** Flag indicating whether we have called bind on the service. */
-    boolean mBound, nBound;
-
-
-    private ServiceConnection mConnection = new ServiceConnection() {
-        public void onServiceConnected(ComponentName className, IBinder service) {
-            // This is called when the connection with the service has been
-            // established, giving us the object we can use to
-            // interact with the service.  We are communicating with the
-            // service using a Messenger, so here we get a client-side
-            // representation of that from the raw IBinder object.
-            mService = new Messenger(service);
-            mBound = true;
-        }
-
-        public void onServiceDisconnected(ComponentName className) {
-            // This is called when the connection with the service has been
-            // unexpectedly disconnected -- that is, its process crashed.
-            mService = null;
-            mBound = false;
-        }
-    };
-
-    //This is a simple service copy, for the second bound service (Listener)
-    private ServiceConnection nConnection = new ServiceConnection() {
-        public void onServiceConnected(ComponentName className, IBinder service) {
-            // This is called when the connection with the service has been
-            // established, giving us the object we can use to
-            // interact with the service.  We are communicating with the
-            // service using a Messenger, so here we get a client-side
-            // representation of that from the raw IBinder object.
-            nService = new Messenger(service);
-            nBound = true;
-        }
-
-        public void onServiceDisconnected(ComponentName className) {
-            // This is called when the connection with the service has been
-            // unexpectedly disconnected -- that is, its process crashed.
-            nService = null;
-            nBound = false;
-        }
-    };
 
     @Override
     public void onDestroy() {
-
         /*
-        Here it should unbind all active parser services
-        for(selectedServices){
-            unbind(service[i]);
-        }
+        Here, it needs to unbind everything that is bound to it
          */
-        if (mBound) {
-            unbindService(mConnection);
-            mBound = false;
-        }
 
         Toast.makeText(this, "Mycroft service terminated", Toast.LENGTH_SHORT).show();
     }
