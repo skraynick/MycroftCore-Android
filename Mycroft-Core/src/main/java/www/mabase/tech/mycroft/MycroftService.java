@@ -76,8 +76,9 @@ public class MycroftService extends Service {
         return mMessenger.getBinder();
     }
 
-    //This service needs to be able to 'hear' the responses from parsers
     /*
+    This service needs to be able to 'hear' the responses from parsers
+
     The service listens for responses from the parser.
     THIS SHOULD BE REPLACED WITH AN INCOMING HANDLER
      */
@@ -155,7 +156,10 @@ public class MycroftService extends Service {
 
     //This is catching MycroftActivity CLI and VoiceService utterances for parsing.
     private void parseUtterance(String Utterance) {
-       /* // Create and send a message to the service, using a supported 'what' value
+       /*
+       This is commented two ways, since I may use this code later and I want to keep the comments
+
+       // Create and send a message to the service, using a supported 'what' value
         Message msg = Message.obtain();
         //Set the what to parse
         msg.what = 1;
