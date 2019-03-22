@@ -31,7 +31,7 @@ public class MycroftService extends Service {
     }
 
     // I am defining a custom Handler, with its own handleMessage method
-    private static Handler IncomingHandler = new Handler(){
+    private Handler IncomingHandler = new Handler(){
         @Override
         public void handleMessage(Message msg){
             /*
@@ -40,8 +40,10 @@ public class MycroftService extends Service {
             */
             // Get the bundle and extract the message
             Bundle bundle = msg.getData();
+            String temp = (String)bundle.get("Message");
             // I should wrap this in a try catch
-            Log.i("MycroftService", (String)bundle.get("Message"));
+            Log.i("MycroftService", temp);
+            toastMessage(temp);
             /*
             if(msg == "Utterance"){
                 parseUtterance(msg);
@@ -53,6 +55,11 @@ public class MycroftService extends Service {
 
         }
     };
+
+    public void toastMessage(String message){
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
     @Override
     public IBinder onBind(Intent intent) {
 

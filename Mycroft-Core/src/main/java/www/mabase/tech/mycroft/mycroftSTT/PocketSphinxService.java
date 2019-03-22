@@ -51,7 +51,7 @@ public class PocketSphinxService extends Service implements RecognitionListener{
     private SpeechRecognizer recognizer;
     private HashMap<String, Integer> captions;
 
-    private boolean bound = false; // Flag indicating whether we've bound the service
+    boolean bound = false; // Flag indicating whether we've bound the service
     Messenger mService = null; // Messenger for communicating with the service
 
     // Implement the abstract class ServiceConnection()
@@ -129,24 +129,6 @@ public class PocketSphinxService extends Service implements RecognitionListener{
         // Should be Context.BIND_EXTERNAL_SERVICE, but that's API 24)
         bindService(bindToMycroftService, mycroftConnection, Context.BIND_AUTO_CREATE);
 
-        // Message that the connections been made
-        if(bound) {
-            Message msg = Message.obtain();
-            //Create bundle with utterance data
-            Bundle bundle = new Bundle();
-            // It's a Key-Value pair
-            bundle.putString("Message", "MycroftSTT Connected");
-            msg.setData(bundle);
-            try {
-                mService.send(msg);
-            } catch (RemoteException e) {
-                Log.e("MycroftSTT","The message couldn't send");
-                e.printStackTrace();
-            }
-        }else{
-            Log.e("MycroftSTT","The service was never bound");
-        }
-
         //There needs to be implemented a permission check before this is initialized, otherwise the
         //system could crash, or users wouldn't know why it isn't working
         new SetupTask(this).execute();
@@ -212,10 +194,25 @@ public class PocketSphinxService extends Service implements RecognitionListener{
      */
     @Override
     public void onResult(Hypothesis hypothesis) {
-        Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
         if (hypothesis != null) {
             String text = hypothesis.getHypstr();
-            makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
+            // Message that the connections been made
+            if(bound){
+                Message msg = Message.obtain();
+                //Create bundle with utterance data
+                Bundle bundle = new Bundle();
+                // It's a Key-Value pair
+                bundle.putString("Message", text);
+                msg.setData(bundle);
+                try {
+                    mService.send(msg);
+                } catch (RemoteException e) {
+                    Log.e("MycroftSTT","The message couldn't send");
+                    e.printStackTrace();
+                }
+            }else{
+                Log.e("MycroftSTT","The service was never bound");
+            }
         }
     }
 
@@ -245,7 +242,6 @@ public class PocketSphinxService extends Service implements RecognitionListener{
             recognizer.startListening(searchName, 10000);
 
         //String caption = getResources().getString(captions.get(searchName));
-        Toast.makeText(this, searchName, Toast.LENGTH_SHORT).show();
     }
 
     // PocketSphinx specific method
@@ -273,7 +269,7 @@ public class PocketSphinxService extends Service implements RecognitionListener{
 
     @Override
     public void onError(Exception error) {
-        Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
+        Log.e("MycroftSTT", error.getMessage());
     }
 
     @Override
