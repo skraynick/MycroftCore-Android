@@ -41,13 +41,13 @@
         </service>
 
         <provider
-            android:name=".coredatabases.MycroftContentProvider"
+            android:name=".coreDatabases.MycroftContentProvider"
             android:authorities="www.mabase.tech.mycroft"
             android:enabled="true"
             android:exported="true" />
 
         <service
-            android:name=".mycroftstt.PocketSphinxService"
+            android:name=".mycroftSTT.PocketSphinxService"
             android:enabled="true"
             android:exported="true">
             <intent-filter>

@@ -1,5 +1,4 @@
 cmudict-en-us.dict
-en-us-ptm/README
 en-us-ptm/feat.params
 en-us-ptm/mdef
 en-us-ptm/means
@@ -7,4 +6,4 @@ en-us-ptm/noisedict
 en-us-ptm/sendump
 en-us-ptm/transition_matrices
 en-us-ptm/variances
-en-us.lm.bin
+lm_giga_5k_nvp_2gram.lm.bin

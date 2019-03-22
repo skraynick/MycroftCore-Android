@@ -2,23 +2,17 @@ package www.mabase.tech.mycroft;
 
 import android.app.Service;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
-import android.os.Binder;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
-import android.os.RemoteException;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
 
-import java.util.LinkedList;
-
-import www.mabase.tech.mycroft.mycroftstt.PocketSphinxService;
+import www.mabase.tech.mycroft.mycroftSTT.PocketSphinxService;
 
 /**
  * This service ensures that Mycroft is always running and always available. It also offers a simple CLI for the user.
