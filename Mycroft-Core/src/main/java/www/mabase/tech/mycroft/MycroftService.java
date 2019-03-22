@@ -225,7 +225,6 @@ public class MycroftService extends Service {
         /*
         Here, it needs to unbind everything that is bound to it
          */
-
         Toast.makeText(this, "Mycroft service terminated", Toast.LENGTH_SHORT).show();
     }
 }

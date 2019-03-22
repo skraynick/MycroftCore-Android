@@ -1,5 +1,6 @@
 package www.mabase.tech.mycroft;
 
+import android.Manifest;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.ComponentName;
@@ -10,6 +11,8 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +23,9 @@ import java.security.spec.ECField;
 import java.util.List;
 import java.util.ServiceConfigurationError;
 
+import www.mabase.tech.mycroft.mycroftSTT.PocketSphinxService;
+
+import static android.content.pm.PermissionInfo.PROTECTION_NORMAL;
 import static java.security.AccessController.getContext;
 
 /**
@@ -45,6 +51,24 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        /*
+        Check at startup that all needed permissions are granted. Perhaps this needs to work as
+        a central point for all plugins and skills to do their checks?
+         */
+        doPermissionsCheck();
+    }
+
+    public void doPermissionsCheck(){
+        // If the permission isn't granted
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.RECORD_AUDIO},
+                    PROTECTION_NORMAL);
+
+        }
+
     }
 
     /*
@@ -112,6 +136,12 @@ public class MainActivity extends AppCompatActivity {
     public void stopMycroft(View v){
         Log.i("Mycroft","stopMycroft() not yet implemented");
 
+        // This needs to be done in MycroftService
+        Intent stopSTT = new Intent();
+        stopSTT.setClass(this, PocketSphinxService.class);
+        stopService(stopSTT);
+
+        //This should call a custom intent, which shuts down all bound activities, and then stops service
         Intent mycroft = new Intent();
         mycroft.setClass(this, MycroftService.class);
         stopService(mycroft);
