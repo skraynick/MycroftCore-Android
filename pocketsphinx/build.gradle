@@ -1,2 +1,4 @@
 configurations.maybeCreate("default")
 artifacts.add("default", file('pocketsphinx-android-5prealpha-release.aar'))
+dependencies {
+}

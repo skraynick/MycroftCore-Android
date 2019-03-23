@@ -1,4 +1,4 @@
-It is appearing that the Intent Parser (NNInentParser) is gaining some feature creap. Perhaps I will
+It is appearing that the Intent Parser (NNInentParser) is gaining some feature creep. Perhaps I will
 have to split it off into two modules before too long.
 
 The reason for this feature creep is that I am trying to keep the intent matching and parsing features
